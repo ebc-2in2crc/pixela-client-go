@@ -24,7 +24,7 @@ import (
 func main() {
 	client := pixela.NewClient("YOUR_NAME", "YOUR_TOKEN")
 
-	// create new user
+	// 新しいユーザーを作る
 	result, err := client.CreateUser(true, true, "")
 	if err != nil {
 		log.Fatal(err)
@@ -33,7 +33,7 @@ func main() {
 		log.Fatal(result.Message)
 	}
 
-	// create new graph
+	// 新しいグラフを作る
 	result, err = client.Graph("graph-id").Create(
 		"graph-name",
 		"commit",
@@ -50,7 +50,7 @@ func main() {
 		log.Fatal(result.Message)
 	}
 
-	// register value
+	// 値をピクセルに記録する
 	result, err = client.Pixel("graph-id").Create("20180915", "5")
 	if err != nil {
 		log.Fatal(err)
@@ -59,7 +59,7 @@ func main() {
 		log.Fatal(result.Message)
 	}
 
-	// increment value
+	// ピクセルの値をインクリメントする
 	result, err = client.Pixel("graph-id").Increment()
 	if err != nil {
 		log.Fatal(err)
@@ -68,7 +68,7 @@ func main() {
 		log.Fatal(result.Message)
 	}
 
-	// create new webhook
+	// 新しい webhook を作る
 	webhook, err := client.Webhook().Create("graph-id", pixela.SelfSufficientIncrement)
 	if err != nil {
 		log.Fatal(err)
@@ -77,7 +77,7 @@ func main() {
 		log.Fatal(webhook.Message)
 	}
 
-	// invoke webhook
+	// webhook を呼び出す
 	result, err = client.Webhook().Invoke(webhook.WebhookHash)
 	if err != nil {
 		log.Fatal(err)
