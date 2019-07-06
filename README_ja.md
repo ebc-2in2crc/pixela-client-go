@@ -1,8 +1,12 @@
 [English](README.md) | [日本語](README_ja.md)
 
-# Pixela
+# pixela-client-go
 
 Go 用の [Pixela](https://pixe.la/) API クライアントです。
+
+## ドキュメント
+
+https://godoc.org/github.com/ebc-2in2crc/pixela-client-go
 
 ## インストール
 
