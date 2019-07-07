@@ -2,6 +2,8 @@
 
 # pixela-client-go
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/ebc-2in2crc/pixela-client-go](https://goreportcard.com/report/github.com/ebc-2in2crc/pixela-client-go)
+
 Go 用の [Pixela](https://pixe.la/) API クライアントです。
 
 ## ドキュメント
