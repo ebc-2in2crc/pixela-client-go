@@ -16,8 +16,8 @@ type Graph struct {
 }
 
 // Create creates a new pixelation graph definition.
-func (g *Graph) Create(name, unit, quantityType, color, timezone, selfSufficient string, isSecret bool) (*Result, error) {
-	param, err := g.createCreateRequestParameter(name, unit, quantityType, color, timezone, selfSufficient, isSecret)
+func (g *Graph) Create(name, unit, quantityType, color, timezone, selfSufficient string, isSecret, publishOptionalData bool) (*Result, error) {
+	param, err := g.createCreateRequestParameter(name, unit, quantityType, color, timezone, selfSufficient, isSecret, publishOptionalData)
 	if err != nil {
 		return &Result{}, errors.Wrapf(err, "failed to create graph create parameter")
 	}
@@ -25,16 +25,17 @@ func (g *Graph) Create(name, unit, quantityType, color, timezone, selfSufficient
 	return doRequestAndParseResponse(param)
 }
 
-func (g *Graph) createCreateRequestParameter(name, unit, quantityType, color, timezone, selfSufficient string, isSecret bool) (*requestParameter, error) {
+func (g *Graph) createCreateRequestParameter(name, unit, quantityType, color, timezone, selfSufficient string, isSecret, publishOptionalData bool) (*requestParameter, error) {
 	create := graphCreate{
-		ID:             g.GraphID,
-		Name:           name,
-		Unit:           unit,
-		Type:           quantityType,
-		Color:          color,
-		TimeZone:       timezone,
-		SelfSufficient: selfSufficient,
-		IsSecret:       isSecret,
+		ID:                  g.GraphID,
+		Name:                name,
+		Unit:                unit,
+		Type:                quantityType,
+		Color:               color,
+		TimeZone:            timezone,
+		SelfSufficient:      selfSufficient,
+		IsSecret:            isSecret,
+		PublishOptionalData: publishOptionalData,
 	}
 	b, err := json.Marshal(create)
 	if err != nil {
@@ -50,14 +51,15 @@ func (g *Graph) createCreateRequestParameter(name, unit, quantityType, color, ti
 }
 
 type graphCreate struct {
-	ID             string `json:"id"`
-	Name           string `json:"name"`
-	Unit           string `json:"unit"`
-	Type           string `json:"type"`
-	Color          string `json:"color"`
-	TimeZone       string `json:"timezone"`
-	SelfSufficient string `json:"selfSufficient"`
-	IsSecret       bool   `json:"isSecret"`
+	ID                  string `json:"id"`
+	Name                string `json:"name"`
+	Unit                string `json:"unit"`
+	Type                string `json:"type"`
+	Color               string `json:"color"`
+	TimeZone            string `json:"timezone"`
+	SelfSufficient      string `json:"selfSufficient"`
+	IsSecret            bool   `json:"isSecret"`
+	PublishOptionalData bool   `json:"publishOptionalData"`
 }
 
 // It is the type of quantity to be handled in the graph.
@@ -126,15 +128,16 @@ type GraphDefinitions struct {
 
 // GraphDefinition is graph definition.
 type GraphDefinition struct {
-	ID             string   `json:"id"`
-	Name           string   `json:"name"`
-	Unit           string   `json:"unit"`
-	Type           string   `json:"type"`
-	Color          string   `json:"color"`
-	TimeZone       string   `json:"timezone"`
-	PurgeCacheURLs []string `json:"purgeCacheURLs"`
-	SelfSufficient string   `json:"selfSufficient"`
-	IsSecret       bool     `json:"isSecret"`
+	ID                  string   `json:"id"`
+	Name                string   `json:"name"`
+	Unit                string   `json:"unit"`
+	Type                string   `json:"type"`
+	Color               string   `json:"color"`
+	TimeZone            string   `json:"timezone"`
+	PurgeCacheURLs      []string `json:"purgeCacheURLs"`
+	SelfSufficient      string   `json:"selfSufficient"`
+	IsSecret            bool     `json:"isSecret"`
+	PublishOptionalData bool     `json:"publishOptionalData"`
 }
 
 // GetSVG get a graph expressed in SVG format diagram that based on the registered information.
@@ -221,8 +224,8 @@ func (g *Graph) createStatsRequestParameter() (*requestParameter, error) {
 
 // Update updates predefined pixelation graph definitions.
 // The items that can be updated are limited as compared with the pixelation graph definition creation.
-func (g *Graph) Update(name, unit, color, timezone string, purgeCacheUrls []string, selfSufficient string, isSecret bool) (*Result, error) {
-	param, err := g.createUpdateRequestParameter(name, unit, color, timezone, purgeCacheUrls, selfSufficient, isSecret)
+func (g *Graph) Update(name, unit, color, timezone string, purgeCacheUrls []string, selfSufficient string, isSecret bool, publishOptionalData bool) (*Result, error) {
+	param, err := g.createUpdateRequestParameter(name, unit, color, timezone, purgeCacheUrls, selfSufficient, isSecret, publishOptionalData)
 	if err != nil {
 		return &Result{}, errors.Wrapf(err, "failed to create graph update parameter")
 	}
@@ -230,15 +233,16 @@ func (g *Graph) Update(name, unit, color, timezone string, purgeCacheUrls []stri
 	return doRequestAndParseResponse(param)
 }
 
-func (g *Graph) createUpdateRequestParameter(name, unit, color, timezone string, purgeCacheUrls []string, selfSufficient string, isSecret bool) (*requestParameter, error) {
+func (g *Graph) createUpdateRequestParameter(name, unit, color, timezone string, purgeCacheUrls []string, selfSufficient string, isSecret, publishOptionalData bool) (*requestParameter, error) {
 	update := graphUpdate{
-		Name:           name,
-		Unit:           unit,
-		Color:          color,
-		TimeZone:       timezone,
-		PurgeCacheURLs: purgeCacheUrls,
-		SelfSufficient: selfSufficient,
-		IsSecret:       isSecret,
+		Name:                name,
+		Unit:                unit,
+		Color:               color,
+		TimeZone:            timezone,
+		PurgeCacheURLs:      purgeCacheUrls,
+		SelfSufficient:      selfSufficient,
+		IsSecret:            isSecret,
+		PublishOptionalData: publishOptionalData,
 	}
 	b, err := json.Marshal(update)
 	if err != nil {
@@ -254,13 +258,14 @@ func (g *Graph) createUpdateRequestParameter(name, unit, color, timezone string,
 }
 
 type graphUpdate struct {
-	Name           string   `json:"name"`
-	Unit           string   `json:"unit"`
-	Color          string   `json:"color"`
-	TimeZone       string   `json:"timezone"`
-	PurgeCacheURLs []string `json:"purgeCacheURLs"`
-	SelfSufficient string   `json:"selfSufficient"`
-	IsSecret       bool     `json:"isSecret"`
+	Name                string   `json:"name"`
+	Unit                string   `json:"unit"`
+	Color               string   `json:"color"`
+	TimeZone            string   `json:"timezone"`
+	PurgeCacheURLs      []string `json:"purgeCacheURLs"`
+	SelfSufficient      string   `json:"selfSufficient"`
+	IsSecret            bool     `json:"isSecret"`
+	PublishOptionalData bool     `json:"publishOptionalData"`
 }
 
 // Delete deletes the predefined pixelation graph definition.

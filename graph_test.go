@@ -11,7 +11,7 @@ import (
 func TestCreateGraphCreateRequestParameter(t *testing.T) {
 	client := Client{UserName: userName, Token: token}
 	param, err := client.Graph(graphID).createCreateRequestParameter(
-		"name", "times", TypeInt, ColorShibafu, "UTC", SelfSufficientIncrement, true)
+		"name", "times", TypeInt, ColorShibafu, "UTC", SelfSufficientIncrement, true, true)
 	if err != nil {
 		t.Errorf("got: %v\nwant: nil", err)
 	}
@@ -29,7 +29,7 @@ func TestCreateGraphCreateRequestParameter(t *testing.T) {
 		t.Errorf("%s: %s\nwant: %s", userToken, param.Header[userToken], token)
 	}
 
-	s := `{"id":"graph-id","name":"name","unit":"times","type":"int","color":"shibafu","timezone":"UTC","selfSufficient":"increment","isSecret":true}`
+	s := `{"id":"graph-id","name":"name","unit":"times","type":"int","color":"shibafu","timezone":"UTC","selfSufficient":"increment","isSecret":true,"publishOptionalData":true}`
 	b := []byte(s)
 	if bytes.Equal(param.Body, b) == false {
 		t.Errorf("Body: %s\nwant: %s", string(param.Body), s)
@@ -41,7 +41,7 @@ func TestGraphCreate(t *testing.T) {
 
 	client := Client{UserName: userName, Token: token}
 	result, err := client.Graph(graphID).Create(
-		"name", "times", TypeInt, ColorShibafu, "UTC", SelfSufficientIncrement, true)
+		"name", "times", TypeInt, ColorShibafu, "UTC", SelfSufficientIncrement, true, true)
 
 	testSuccess(t, result, err)
 }
@@ -51,7 +51,7 @@ func TestGraphCreateFail(t *testing.T) {
 
 	client := Client{UserName: userName, Token: token}
 	result, err := client.Graph(graphID).Create(
-		"name", "times", TypeInt, ColorShibafu, "UTC", SelfSufficientIncrement, true)
+		"name", "times", TypeInt, ColorShibafu, "UTC", SelfSufficientIncrement, true, true)
 
 	testAPIFailedResult(t, result, err)
 }
@@ -61,7 +61,7 @@ func TestGraphCreateError(t *testing.T) {
 
 	client := Client{UserName: userName, Token: token}
 	_, err := client.Graph(graphID).Create(
-		"name", "times", TypeInt, ColorShibafu, "UTC", SelfSufficientIncrement, true)
+		"name", "times", TypeInt, ColorShibafu, "UTC", SelfSufficientIncrement, true, true)
 
 	testPageNotFoundError(t, err)
 }
@@ -92,7 +92,7 @@ func TestCreateGraphGetAllRequestParameter(t *testing.T) {
 }
 
 func TestGraphGetAll(t *testing.T) {
-	s := `{"graphs":[{"id":"test-graph","name":"graph-name","unit":"commit","type":"int","color":"shibafu","timezone":"Asia/Tokyo","purgeCacheURLs":["https://camo.githubusercontent.com/xxx/xxxx"],"selfSufficient":"increment","isSecret":true}]}`
+	s := `{"graphs":[{"id":"test-graph","name":"graph-name","unit":"commit","type":"int","color":"shibafu","timezone":"Asia/Tokyo","purgeCacheURLs":["https://camo.githubusercontent.com/xxx/xxxx"],"selfSufficient":"increment","isSecret":true,"publishOptionalData":true}]}`
 	b := []byte(s)
 	clientMock = &httpClientMock{statusCode: http.StatusOK, body: b}
 
@@ -105,15 +105,16 @@ func TestGraphGetAll(t *testing.T) {
 	expect := &GraphDefinitions{
 		Graphs: []GraphDefinition{
 			{
-				ID:             "test-graph",
-				Name:           "graph-name",
-				Unit:           "commit",
-				Type:           "int",
-				Color:          "shibafu",
-				TimeZone:       "Asia/Tokyo",
-				PurgeCacheURLs: []string{"https://camo.githubusercontent.com/xxx/xxxx"},
-				SelfSufficient: "increment",
-				IsSecret:       true,
+				ID:                  "test-graph",
+				Name:                "graph-name",
+				Unit:                "commit",
+				Type:                "int",
+				Color:               "shibafu",
+				TimeZone:            "Asia/Tokyo",
+				PurgeCacheURLs:      []string{"https://camo.githubusercontent.com/xxx/xxxx"},
+				SelfSufficient:      "increment",
+				IsSecret:            true,
+				PublishOptionalData: true,
 			},
 		},
 		Result: Result{IsSuccess: true},
@@ -289,7 +290,7 @@ func TestGraphStatsError(t *testing.T) {
 func TestCreateGraphUpdateRequestParameter(t *testing.T) {
 	client := Client{UserName: userName, Token: token}
 	param, err := client.Graph(graphID).createUpdateRequestParameter(
-		"name", "times", ColorShibafu, "UTC", []string{"https://camo.githubusercontent.com/xxx/xxxx"}, SelfSufficientIncrement, true)
+		"name", "times", ColorShibafu, "UTC", []string{"https://camo.githubusercontent.com/xxx/xxxx"}, SelfSufficientIncrement, true, true)
 	if err != nil {
 		t.Errorf("got: %v\nwant: nil", err)
 	}
@@ -307,7 +308,7 @@ func TestCreateGraphUpdateRequestParameter(t *testing.T) {
 		t.Errorf("%s: %s\nwant: %s", userToken, param.Header[userToken], token)
 	}
 
-	s := `{"name":"name","unit":"times","color":"shibafu","timezone":"UTC","purgeCacheURLs":["https://camo.githubusercontent.com/xxx/xxxx"],"selfSufficient":"increment","isSecret":true}`
+	s := `{"name":"name","unit":"times","color":"shibafu","timezone":"UTC","purgeCacheURLs":["https://camo.githubusercontent.com/xxx/xxxx"],"selfSufficient":"increment","isSecret":true,"publishOptionalData":true}`
 	b := []byte(s)
 	if bytes.Equal(param.Body, b) == false {
 		t.Errorf("Body: %s\nwant: %s", string(param.Body), s)
@@ -319,7 +320,7 @@ func TestGraphUpdate(t *testing.T) {
 
 	client := Client{UserName: userName, Token: token}
 	result, err := client.Graph(graphID).Update(
-		"name", "times", ColorShibafu, "UTC", []string{"https://camo.githubusercontent.com/xxx/xxxx"}, SelfSufficientIncrement, true)
+		"name", "times", ColorShibafu, "UTC", []string{"https://camo.githubusercontent.com/xxx/xxxx"}, SelfSufficientIncrement, true, true)
 
 	testSuccess(t, result, err)
 }
@@ -329,7 +330,7 @@ func TestGraphUpdateFail(t *testing.T) {
 
 	client := Client{UserName: userName, Token: token}
 	result, err := client.Graph(graphID).Update(
-		"name", "times", ColorShibafu, "UTC", []string{"https://camo.githubusercontent.com/xxx/xxxx"}, SelfSufficientIncrement, true)
+		"name", "times", ColorShibafu, "UTC", []string{"https://camo.githubusercontent.com/xxx/xxxx"}, SelfSufficientIncrement, true, true)
 
 	testAPIFailedResult(t, result, err)
 }
@@ -339,7 +340,7 @@ func TestGraphUpdateError(t *testing.T) {
 
 	client := Client{UserName: userName, Token: token}
 	_, err := client.Graph(graphID).Update(
-		"name", "times", ColorShibafu, "UTC", []string{"https://camo.githubusercontent.com/xxx/xxxx"}, SelfSufficientIncrement, true)
+		"name", "times", ColorShibafu, "UTC", []string{"https://camo.githubusercontent.com/xxx/xxxx"}, SelfSufficientIncrement, true, true)
 
 	testPageNotFoundError(t, err)
 }
