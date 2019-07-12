@@ -9,7 +9,7 @@ import (
 
 func TestCreatePixelCreateRequestParameter(t *testing.T) {
 	client := Client{UserName: userName, Token: token}
-	param, err := client.Pixel(graphID).createCreateRequestParameter("20180915", "5")
+	param, err := client.Pixel(graphID).createCreateRequestParameter("20180915", "5", "{\"key\":\"value\"}")
 	if err != nil {
 		t.Errorf("got: %v\nwant: nil", err)
 	}
@@ -27,7 +27,7 @@ func TestCreatePixelCreateRequestParameter(t *testing.T) {
 		t.Errorf("%s: %s\nwant: %s", userToken, param.Header[userToken], token)
 	}
 
-	s := `{"date":"20180915","quantity":"5"}`
+	s := `{"date":"20180915","quantity":"5","optionalData":"{\"key\":\"value\"}"}`
 	b := []byte(s)
 	if bytes.Equal(param.Body, b) == false {
 		t.Errorf("Body: %s\nwant: %s", string(param.Body), s)
@@ -193,7 +193,7 @@ func TestCreatePixelGetRequestParameter(t *testing.T) {
 }
 
 func TestPixelGet(t *testing.T) {
-	s := `{"quantity": "5"}`
+	s := `{"quantity": "5","optionalData":"{\"key\":\"value\"}"}`
 	b := []byte(s)
 	clientMock = &httpClientMock{statusCode: http.StatusOK, body: b}
 
@@ -205,6 +205,7 @@ func TestPixelGet(t *testing.T) {
 
 	expect := &Quantity{
 		Quantity: "5",
+		OptionalData: "{\"key\":\"value\"}",
 		Result:   Result{IsSuccess: true},
 	}
 	if *quantity != *expect {

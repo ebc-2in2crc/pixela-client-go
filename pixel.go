@@ -17,7 +17,7 @@ type Pixel struct {
 
 // Create records the quantity of the specified date as a "Pixel".
 func (p *Pixel) Create(date string, quantity string) (*Result, error) {
-	param, err := p.createCreateRequestParameter(date, quantity)
+	param, err := p.createCreateRequestParameter(date, quantity, "")
 	if err != nil {
 		return &Result{}, errors.Wrapf(err, "failed to create pixel create parameter")
 	}
@@ -25,8 +25,8 @@ func (p *Pixel) Create(date string, quantity string) (*Result, error) {
 	return doRequestAndParseResponse(param)
 }
 
-func (p *Pixel) createCreateRequestParameter(date, quantity string) (*requestParameter, error) {
-	create := pixelCreate{Date: date, Quantity: quantity}
+func (p *Pixel) createCreateRequestParameter(date, quantity, optionalData string) (*requestParameter, error) {
+	create := pixelCreate{Date: date, Quantity: quantity, OptionalData: optionalData}
 	b, err := json.Marshal(&create)
 	if err != nil {
 		return &requestParameter{}, errors.Wrap(err, "failed to marshal json")
@@ -41,8 +41,9 @@ func (p *Pixel) createCreateRequestParameter(date, quantity string) (*requestPar
 }
 
 type pixelCreate struct {
-	Date     string `json:"date"`
-	Quantity string `json:"quantity"`
+	Date         string `json:"date"`
+	Quantity     string `json:"quantity"`
+	OptionalData string `json:"optionalData"`
 }
 
 // Increment increments quantity "Pixel" of the day (it is used "timezone" setting if Graph's "timezone" is specified, if not specified, calculates it in "UTC").
@@ -117,7 +118,8 @@ func (p *Pixel) createGetRequestParameter(date string) (*requestParameter, error
 
 // Quantity ... registered quantity.
 type Quantity struct {
-	Quantity string `json:"quantity"`
+	Quantity     string `json:"quantity"`
+	OptionalData string `json:"optionalData"`
 	Result
 }
 
