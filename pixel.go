@@ -16,8 +16,8 @@ type Pixel struct {
 }
 
 // Create records the quantity of the specified date as a "Pixel".
-func (p *Pixel) Create(date string, quantity string) (*Result, error) {
-	param, err := p.createCreateRequestParameter(date, quantity, "")
+func (p *Pixel) Create(date string, quantity, optionalData string) (*Result, error) {
+	param, err := p.createCreateRequestParameter(date, quantity, optionalData)
 	if err != nil {
 		return &Result{}, errors.Wrapf(err, "failed to create pixel create parameter")
 	}

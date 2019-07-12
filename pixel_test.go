@@ -38,7 +38,7 @@ func TestPixelCreate(t *testing.T) {
 	clientMock = newOKMock()
 
 	client := Client{UserName: userName, Token: token}
-	result, err := client.Pixel(graphID).Create("20180915", "5")
+	result, err := client.Pixel(graphID).Create("20180915", "5", "")
 
 	testSuccess(t, result, err)
 }
@@ -47,7 +47,7 @@ func TestPixelCreateFail(t *testing.T) {
 	clientMock = newAPIFailedMock()
 
 	client := Client{UserName: userName, Token: token}
-	result, err := client.Pixel(graphID).Create("20180915", "5")
+	result, err := client.Pixel(graphID).Create("20180915", "5", "")
 
 	testAPIFailedResult(t, result, err)
 }
@@ -56,7 +56,7 @@ func TestPixelCreateError(t *testing.T) {
 	clientMock = newPageNotFoundMock()
 
 	client := Client{UserName: userName, Token: token}
-	_, err := client.Pixel(graphID).Create("20180915", "5")
+	_, err := client.Pixel(graphID).Create("20180915", "5", "")
 
 	testPageNotFoundError(t, err)
 }
