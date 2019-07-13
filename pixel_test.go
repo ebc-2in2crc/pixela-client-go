@@ -233,7 +233,7 @@ func TestPixelGetError(t *testing.T) {
 
 func TestCreatePixelUpdateRequestParameter(t *testing.T) {
 	client := Client{UserName: userName, Token: token}
-	param, err := client.Pixel(graphID).createUpdateRequestParameter("20180915", "5")
+	param, err := client.Pixel(graphID).createUpdateRequestParameter("20180915", "5", "{\"key\":\"value\"}")
 	if err != nil {
 		t.Errorf("got: %v\nwant: nil", err)
 	}
@@ -251,7 +251,7 @@ func TestCreatePixelUpdateRequestParameter(t *testing.T) {
 		t.Errorf("%s: %s\nwant: %s", userToken, param.Header[userToken], token)
 	}
 
-	s := `{"quantity":"5"}`
+	s := `{"quantity":"5","optionalData":"{\"key\":\"value\"}"}`
 	b := []byte(s)
 	if bytes.Equal(param.Body, b) == false {
 		t.Errorf("Body: %s\nwant: %s", string(param.Body), s)
@@ -262,7 +262,7 @@ func TestPixelUpdate(t *testing.T) {
 	clientMock = newOKMock()
 
 	client := Client{UserName: userName, Token: token}
-	result, err := client.Pixel(graphID).Update("20180915", "5")
+	result, err := client.Pixel(graphID).Update("20180915", "5", "")
 
 	testSuccess(t, result, err)
 }
@@ -271,7 +271,7 @@ func TestPixelUpdateFail(t *testing.T) {
 	clientMock = newAPIFailedMock()
 
 	client := Client{UserName: userName, Token: token}
-	result, err := client.Pixel(graphID).Update("20180915", "5")
+	result, err := client.Pixel(graphID).Update("20180915", "5", "")
 
 	testAPIFailedResult(t, result, err)
 }
@@ -280,7 +280,7 @@ func TestPixelUpdateError(t *testing.T) {
 	clientMock = newPageNotFoundMock()
 
 	client := Client{UserName: userName, Token: token}
-	_, err := client.Pixel(graphID).Update("20180915", "5")
+	_, err := client.Pixel(graphID).Update("20180915", "5", "")
 
 	testPageNotFoundError(t, err)
 }

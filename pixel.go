@@ -124,8 +124,8 @@ type Quantity struct {
 }
 
 // Update updates the quantity already registered as a "Pixel".
-func (p *Pixel) Update(date, quantity string) (*Result, error) {
-	param, err := p.createUpdateRequestParameter(date, quantity)
+func (p *Pixel) Update(date, quantity, optionalData string) (*Result, error) {
+	param, err := p.createUpdateRequestParameter(date, quantity, optionalData)
 	if err != nil {
 		return &Result{}, errors.Wrapf(err, "failed to create pixel update parameter")
 	}
@@ -133,8 +133,8 @@ func (p *Pixel) Update(date, quantity string) (*Result, error) {
 	return doRequestAndParseResponse(param)
 }
 
-func (p *Pixel) createUpdateRequestParameter(date, quantity string) (*requestParameter, error) {
-	update := pixelUpdate{Quantity: quantity}
+func (p *Pixel) createUpdateRequestParameter(date, quantity, optionalData string) (*requestParameter, error) {
+	update := pixelUpdate{Quantity: quantity, OptionalData: optionalData}
 	b, err := json.Marshal(update)
 	if err != nil {
 		return &requestParameter{}, errors.Wrap(err, "failed to marshal json")
@@ -149,7 +149,8 @@ func (p *Pixel) createUpdateRequestParameter(date, quantity string) (*requestPar
 }
 
 type pixelUpdate struct {
-	Quantity string `json:"quantity"`
+	Quantity     string `json:"quantity"`
+	OptionalData string `json:"optionalData"`
 }
 
 // Delete deletes the registered "Pixel".
