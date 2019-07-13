@@ -171,9 +171,19 @@ const (
 	ModeLine  = "line"
 )
 
+// Specify the graph display mode in html format.
+const (
+	ModeSimple      = "simple"
+	ModeSimpleShort = "simple-short"
+)
+
 // URL displays the details of the graph in html format.
-func (g *Graph) URL() string {
-	return fmt.Sprintf(APIBaseURL+"/users/%s/graphs/%s.html", g.UserName, g.GraphID)
+func (g *Graph) URL(mode string) string {
+	if len(mode) == 0 {
+		return fmt.Sprintf(APIBaseURL+"/users/%s/graphs/%s.html", g.UserName, g.GraphID)
+	}
+
+	return fmt.Sprintf(APIBaseURL+"/users/%s/graphs/%s.html?mode=%s", g.UserName, g.GraphID, mode)
 }
 
 // GraphsURL displays graph list by detail in html format.

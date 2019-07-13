@@ -204,10 +204,21 @@ func TestGraphGetSVGFail(t *testing.T) {
 
 func TestGraphUrl(t *testing.T) {
 	client := Client{UserName: userName, Token: token}
-	url := client.Graph(graphID).URL()
-	expect := fmt.Sprintf(APIBaseURL+"/users/%s/graphs/%s.html", userName, graphID)
-	if url != expect {
-		t.Errorf("got: %s\nwant: %s", url, expect)
+	baseURL := fmt.Sprintf(APIBaseURL+"/users/%s/graphs/%s.html", userName, graphID)
+	params := []struct {
+		mode   string
+		expect string
+	}{
+		{mode: "", expect: baseURL},
+		{mode: "simple", expect: baseURL + "?mode=simple"},
+		{mode: "simple-short", expect: baseURL + "?mode=simple-short"},
+	}
+
+	for _, p := range params {
+		url := client.Graph(graphID).URL(p.mode)
+		if url != p.expect {
+			t.Errorf("got: %s\nwant: %s", url, p.expect)
+		}
 	}
 }
 
