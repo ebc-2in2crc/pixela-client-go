@@ -51,7 +51,8 @@ func main() {
 		pixela.ColorShibafu,
 		"Asia/Tokyo",
 		pixela.SelfSufficientNone,
-		true,
+		false,
+		false,
 	)
 	if err != nil {
 		log.Fatal(err)
@@ -61,7 +62,7 @@ func main() {
 	}
 
 	// 値をピクセルに記録する
-	result, err = client.Pixel("graph-id").Create("20180915", "5")
+	result, err = client.Pixel("graph-id").Create("20180915", "5", "")
 	if err != nil {
 		log.Fatal(err)
 	}
