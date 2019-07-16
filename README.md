@@ -10,6 +10,8 @@
 
 [Pixela](https://pixe.la/) API client for Go.
 
+[![Cloning count](https://pixe.la/v1/users/ebc-2in2crc/graphs/p-c-g-clone)](https://pixe.la/v1/users/ebc-2in2crc/graphs/p-c-g-clone.html)
+
 ## Documentation
 
 https://godoc.org/github.com/ebc-2in2crc/pixela-client-go

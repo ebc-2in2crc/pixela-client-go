@@ -10,6 +10,8 @@
 
 Go 用の [Pixela](https://pixe.la/) API クライアントです。
 
+[![Cloning count](https://pixe.la/v1/users/ebc-2in2crc/graphs/p-c-g-clone)](https://pixe.la/v1/users/ebc-2in2crc/graphs/p-c-g-clone.html)
+
 ## ドキュメント
 
 https://godoc.org/github.com/ebc-2in2crc/pixela-client-go
