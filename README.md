@@ -45,6 +45,20 @@ func main() {
 		log.Fatal(result.Message)
 	}
 
+	// create new slack channel
+	detail := &pixela.SlackDetail{
+		URL: "https://hooks.slack.com/services/xxxx",
+		UserName: "slack-user-name",
+		ChannelName: "slack-channel-name",
+    }
+	result, err = client.Channel().CreateSlackChannel("channel-id", "channel-name", detail)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if result.IsSuccess == false {
+		log.Fatal(result.Message)
+	}
+
 	// create new graph
 	result, err = client.Graph("graph-id").Create(
 		"graph-name",
