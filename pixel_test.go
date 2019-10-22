@@ -204,9 +204,9 @@ func TestPixelGet(t *testing.T) {
 	}
 
 	expect := &Quantity{
-		Quantity: "5",
+		Quantity:     "5",
 		OptionalData: "{\"key\":\"value\"}",
-		Result:   Result{IsSuccess: true},
+		Result:       Result{IsSuccess: true},
 	}
 	if *quantity != *expect {
 		t.Errorf("got: %v\nwant: %v", quantity, expect)
