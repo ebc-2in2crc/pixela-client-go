@@ -49,6 +49,11 @@ func (c *Client) Pixel(graphID string) *Pixel {
 	return &Pixel{UserName: c.UserName, Token: c.Token, GraphID: graphID}
 }
 
+// Notification returns a new Pixela notification API client.
+func (c *Client) Notification(graphID string) *Notification {
+	return &Notification{UserName: c.UserName, Token: c.Token, GraphID: graphID}
+}
+
 // Webhook returns a new Pixela webhook API client.
 func (c *Client) Webhook() *Webhook {
 	return &Webhook{UserName: c.UserName, Token: c.Token}

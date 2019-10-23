@@ -95,6 +95,22 @@ func main() {
 		log.Fatal(result.Message)
 	}
 
+	// 新しい通知ルールを作る
+	result, err = client.Notification("graph-id").Create(
+		"notification-id",
+		"notification-name",
+		pixela.TargetQuantity,
+		pixela.ConditionGreaterThan,
+		"3",
+		"channel-id",
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if result.IsSuccess == false {
+		log.Fatal(result.Message)
+	}
+
 	// 新しい webhook を作る
 	webhook, err := client.Webhook().Create("graph-id", pixela.SelfSufficientIncrement)
 	if err != nil {
