@@ -47,8 +47,8 @@ func main() {
 
 	// 新しい slack チャンネル を作る
 	detail := &pixela.SlackDetail{
-		URL: "https://hooks.slack.com/services/xxxx",
-		UserName: "slack-user-name",
+		URL:         "https://hooks.slack.com/services/xxxx",
+		UserName:    "slack-user-name",
 		ChannelName: "slack-channel-name",
 	}
 	result, err = client.Channel().CreateSlackChannel("channel-id", "channel-name", detail)
