@@ -50,7 +50,7 @@ func main() {
 		URL: "https://hooks.slack.com/services/xxxx",
 		UserName: "slack-user-name",
 		ChannelName: "slack-channel-name",
-    }
+	}
 	result, err = client.Channel().CreateSlackChannel("channel-id", "channel-name", detail)
 	if err != nil {
 		log.Fatal(err)
