@@ -212,6 +212,7 @@ func TestGraphUrl(t *testing.T) {
 		{mode: "", expect: baseURL},
 		{mode: "simple", expect: baseURL + "?mode=simple"},
 		{mode: "simple-short", expect: baseURL + "?mode=simple-short"},
+		{mode: "badge", expect: baseURL + "?mode=badge"},
 	}
 
 	for _, p := range params {

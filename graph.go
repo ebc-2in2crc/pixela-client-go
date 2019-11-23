@@ -165,9 +165,11 @@ func (g *Graph) createGetSVGRequestParameter(date, mode string) (*requestParamet
 }
 
 // Specify the graph display mode.
-// Supported modes are short (for displaying only about 90 days) and line .
+// Supported modes are short (for displaying only about 90 days), badge (Badge format pasted on GitHub README.
+// Information for the last 49 days is expressed in 7 pixels.), and line .
 const (
 	ModeShort = "short"
+	ModeBadge = "badge"
 	ModeLine  = "line"
 )
 
