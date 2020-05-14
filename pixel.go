@@ -81,7 +81,7 @@ func (p *Pixel) createDecrementRequestParameter() (*requestParameter, error) {
 	return &requestParameter{
 		Method: http.MethodPut,
 		URL:    fmt.Sprintf(APIBaseURL+"/users/%s/graphs/%s/decrement", p.UserName, p.GraphID),
-		Header: map[string]string{contentLength: "0", userToken: token},
+		Header: map[string]string{contentLength: "0", userToken: p.Token},
 		Body:   []byte{},
 	}, nil
 }
