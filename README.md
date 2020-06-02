@@ -8,6 +8,9 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/ebc-2in2crc/pixela-client-go)](https://goreportcard.com/report/github.com/ebc-2in2crc/pixela-client-go)
 [![Version](https://img.shields.io/github/release/ebc-2in2crc/pixela-client-go.svg?label=version)](https://img.shields.io/github/release/ebc-2in2crc/pixela-client-go.svg?label=version)
 
+**Note:** Active development on pixela-client-go has stopped. The only future changes will be bug fixes.
+Please see [pixela4go](https://github.com/ebc-2in2crc/pixela4go).
+
 [Pixela](https://pixe.la/) API client for Go.
 
 [![Cloning count](https://pixe.la/v1/users/ebc-2in2crc/graphs/p-c-g-clone)](https://pixe.la/v1/users/ebc-2in2crc/graphs/p-c-g-clone.html)

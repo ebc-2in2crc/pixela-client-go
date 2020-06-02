@@ -8,6 +8,9 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/ebc-2in2crc/pixela-client-go)](https://goreportcard.com/report/github.com/ebc-2in2crc/pixela-client-go)
 [![Version](https://img.shields.io/github/release/ebc-2in2crc/pixela-client-go.svg?label=version)](https://img.shields.io/github/release/ebc-2in2crc/pixela-client-go.svg?label=version)
 
+**注意:** pixela-client-go はバグ修正以外の開発は止まっています。
+[pixela4go](https://github.com/ebc-2in2crc/pixela4go) を使うことを検討してください。
+
 Go 用の [Pixela](https://pixe.la/) API クライアントです。
 
 [![Cloning count](https://pixe.la/v1/users/ebc-2in2crc/graphs/p-c-g-clone)](https://pixe.la/v1/users/ebc-2in2crc/graphs/p-c-g-clone.html)
