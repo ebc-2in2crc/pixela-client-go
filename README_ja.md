@@ -9,6 +9,7 @@
 [![Version](https://img.shields.io/github/release/ebc-2in2crc/pixela-client-go.svg?label=version)](https://img.shields.io/github/release/ebc-2in2crc/pixela-client-go.svg?label=version)
 
 **注意:** pixela-client-go はバグ修正以外の開発は止まっています。
+
 [pixela4go](https://github.com/ebc-2in2crc/pixela4go) を使うことを検討してください。
 
 Go 用の [Pixela](https://pixe.la/) API クライアントです。
