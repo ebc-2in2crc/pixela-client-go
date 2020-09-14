@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.com/ebc-2in2crc/pixela-client-go.svg?branch=master)](https://travis-ci.com/ebc-2in2crc/pixela-client-go)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
-[![GoDoc](https://godoc.org/github.com/ebc-2in2crc/pixela-client-go?status.svg)](https://godoc.org/github.com/ebc-2in2crc/pixela-client-go)
+[![GoDoc](https://godoc.org/github.com/ebc-2in2crc/pixela-client-go?status.svg)](https://pkg.go.dev/github.com/ebc-2in2crc/pixela-client-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ebc-2in2crc/pixela-client-go)](https://goreportcard.com/report/github.com/ebc-2in2crc/pixela-client-go)
 [![Version](https://img.shields.io/github/release/ebc-2in2crc/pixela-client-go.svg?label=version)](https://img.shields.io/github/release/ebc-2in2crc/pixela-client-go.svg?label=version)
 
