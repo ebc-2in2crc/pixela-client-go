@@ -73,7 +73,7 @@ const (
 // shibafu (green), momiji (red), sora (blue), ichou (yellow), ajisai (purple) and kuro (black) are supported as color kind.
 const (
 	ColorShibafu = "shibafu"
-	ColorMomiji  = "momiji "
+	ColorMomiji  = "momiji"
 	ColorSora    = "sora"
 	ColorIchou   = "ichou"
 	ColorAjisai  = "ajisai"
