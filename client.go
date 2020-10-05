@@ -34,11 +34,6 @@ func (c *Client) DeleteUser() (*Result, error) {
 	return c.user().Delete()
 }
 
-// Channel returns a new Pixela channel API client.
-func (c *Client) Channel() *Channel {
-	return &Channel{UserName: c.UserName, Token: c.Token}
-}
-
 // Graph returns a new Pixela graph API client.
 func (c *Client) Graph(graphID string) *Graph {
 	return &Graph{UserName: c.UserName, Token: c.Token, GraphID: graphID}
@@ -47,11 +42,6 @@ func (c *Client) Graph(graphID string) *Graph {
 // Pixel returns a new Pixela pixel API client.
 func (c *Client) Pixel(graphID string) *Pixel {
 	return &Pixel{UserName: c.UserName, Token: c.Token, GraphID: graphID}
-}
-
-// Notification returns a new Pixela notification API client.
-func (c *Client) Notification(graphID string) *Notification {
-	return &Notification{UserName: c.UserName, Token: c.Token, GraphID: graphID}
 }
 
 // Webhook returns a new Pixela webhook API client.

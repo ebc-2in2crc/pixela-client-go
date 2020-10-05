@@ -49,20 +49,6 @@ func main() {
 		log.Fatal(result.Message)
 	}
 
-	// 新しい slack チャンネル を作る
-	detail := &pixela.SlackDetail{
-		URL:         "https://hooks.slack.com/services/xxxx",
-		UserName:    "slack-user-name",
-		ChannelName: "slack-channel-name",
-	}
-	result, err = client.Channel().CreateSlackChannel("channel-id", "channel-name", detail)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if result.IsSuccess == false {
-		log.Fatal(result.Message)
-	}
-
 	// 新しいグラフを作る
 	result, err = client.Graph("graph-id").Create(
 		"graph-name",
@@ -92,22 +78,6 @@ func main() {
 
 	// ピクセルの値をインクリメントする
 	result, err = client.Pixel("graph-id").Increment()
-	if err != nil {
-		log.Fatal(err)
-	}
-	if result.IsSuccess == false {
-		log.Fatal(result.Message)
-	}
-
-	// 新しい通知ルールを作る
-	result, err = client.Notification("graph-id").Create(
-		"notification-id",
-		"notification-name",
-		pixela.TargetQuantity,
-		pixela.ConditionGreaterThan,
-		"3",
-		"channel-id",
-	)
 	if err != nil {
 		log.Fatal(err)
 	}
